@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/java-logging.html -->
+<Configuration packages="com.amazonaws.services.lambda.runtime.log4j2">
+  <Appenders>
+    <Lambda name="Lambda">
+      <!-- https://logging.apache.org/log4j/2.x/manual/layouts.html#JSONLayout -->
+      <JSONLayout compact="true" eventEol="true">
+        <KeyValuePair key="timestamp" value="$${date:yyyy-MM-dd'T'HH:mm:ss.SSSXXX}" />
+      </JSONLayout>
+    </Lambda>
+  </Appenders>
+  <Loggers>
+    <Root level="info">
+      <AppenderRef ref="Lambda" />
+    </Root>
+    <Logger name="software.amazon.awssdk" level="WARN" />
+    <Logger name="software.amazon.awssdk.request" level="DEBUG" />
+  </Loggers>
+</Configuration>
